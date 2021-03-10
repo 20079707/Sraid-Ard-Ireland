@@ -20,20 +20,20 @@ class Shop(models.Model):
     Image = models.ImageField(upload_to='Images/', null=True, blank=True)
     PhoneNo = models.IntegerField(default=0)
     Email = models.EmailField(blank=False)
+    BusinessReg = models.CharField(primary_key=True, max_length=10, default='', blank=False, unique=True)
 
-    Address = models.OneToOneField(Address, null=True, blank=True, on_delete=models.CASCADE)
+    Address = models.OneToOneField(Address, null=False, default='', blank=False, on_delete=models.CASCADE)
 
 
 class Product(models.Model):
     ProductCode = models.IntegerField(primary_key=True, auto_created=True, blank=False, unique=True)
     Name = models.CharField(max_length=50, blank=False)
     Price = models.DecimalField(default=0, max_digits=10000, decimal_places=2)
-    Category = models.CharField(default='Select Category', max_length=50, blank=False)
+    Category = models.CharField(default='', max_length=50, blank=False)
     Image = models.ImageField(upload_to='Images/', null=True, blank=True)
     ProductDescription = models.TextField(max_length=250, blank=True)
     Quantity = models.IntegerField(default=0)
     EntryDate = models.DateTimeField(auto_now_add=True, null=True)
     LastUpdate = models.DateTimeField(auto_now=True, null=True)
     Weight = models.DecimalField(default=0, max_digits=100, decimal_places=1)
-
-#    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.PROTECT)
+    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.CASCADE)
