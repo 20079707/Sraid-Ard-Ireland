@@ -13,6 +13,7 @@ class Address(models.Model):
 
 
 class Shop(models.Model):
+    BusinessReg = models.CharField(max_length=10)
     ShopName = models.CharField(max_length=50, blank=False)
     Slogan = models.CharField(max_length=150, blank=True, null=True)
     Description = models.TextField(max_length=500, blank=False)
@@ -20,6 +21,8 @@ class Shop(models.Model):
     Image = models.ImageField(upload_to='Images/', null=True, blank=True)
     PhoneNo = models.IntegerField(default=0)
     Email = models.EmailField(blank=False)
+
+    Address = models.OneToOneField(Address, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Product(models.Model):
@@ -34,5 +37,4 @@ class Product(models.Model):
     LastUpdate = models.DateTimeField(auto_now=True, null=True)
     Weight = models.DecimalField(default=0, max_digits=100, decimal_places=1)
 
-    def __str__(self):
-        return self.Name
+    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.PROTECT)
