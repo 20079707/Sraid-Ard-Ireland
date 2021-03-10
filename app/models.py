@@ -13,7 +13,6 @@ class Address(models.Model):
 
 
 class Shop(models.Model):
-    BusinessReg = models.CharField(max_length=10)
     ShopName = models.CharField(max_length=50, blank=False)
     Slogan = models.CharField(max_length=150, blank=True, null=True)
     Description = models.TextField(max_length=500, blank=False)
@@ -37,4 +36,4 @@ class Product(models.Model):
     LastUpdate = models.DateTimeField(auto_now=True, null=True)
     Weight = models.DecimalField(default=0, max_digits=100, decimal_places=1)
 
-    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.PROTECT)
+#    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.PROTECT)

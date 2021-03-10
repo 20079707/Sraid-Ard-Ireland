@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.models import Product, Shop, Address
+from app.models import Product, Address, Shop
 
 
 @admin.register(Product)
