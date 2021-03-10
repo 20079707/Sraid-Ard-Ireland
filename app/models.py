@@ -36,4 +36,4 @@ class Product(models.Model):
     EntryDate = models.DateTimeField(auto_now_add=True, null=True)
     LastUpdate = models.DateTimeField(auto_now=True, null=True)
     Weight = models.DecimalField(default=0, max_digits=100, decimal_places=1)
-    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.CASCADE)
+    Shop = models.OneToOneField(Shop, null=False, default='', blank=False, on_delete=models.PROTECT)
