@@ -5,7 +5,7 @@ from app.models import Product, Address, Shop
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['ProductCode', 'Name', 'Price']
+    list_display = ['ProductCode', 'Name', 'Price', 'ProductDescription']
     list_filter = ['LastUpdate']
     search_fields = ['Name']
 
