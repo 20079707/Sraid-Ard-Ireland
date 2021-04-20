@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
-from .models import Product, Address, Shop
+from .models import Product, Address, Shop, Category
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,13 +28,21 @@ class ShopSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shop
-        fields = ['shop_name', 'slogan', 'description', 'address']
+        fields = ['shop_name', 'slogan', 'description', 'address', 'business_reg', 'logo', 'shop_image']
+
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'category_description', 'category_image']
 
 
 class ProductSerializer(serializers.ModelSerializer):
     shop = ShopSerializer(many=False)
+    category = CategorySerializer(many=False)
 
     class Meta:
         model = Product
-        fields = ['product_code', 'name', 'price', 'cover_image', 'product_description', 'last_update', 'product_image',
-                  'shop']
+        fields = ['product_code', 'name', 'price', 'product_description', 'last_update', 'product_image',
+                  'colour', 'stock', 'category', 'shipping_fee', 'shop']

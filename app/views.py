@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from app.models import Product, Address, Shop
-from app.serializers import ProductSerializer, AddressSerializer, ShopSerializer, UserSerializer
+from app.models import Product, Address, Shop, Category
+from app.serializers import ProductSerializer, AddressSerializer, ShopSerializer, UserSerializer, CategorySerializer
 
 
 def Temp(request):
@@ -58,5 +58,12 @@ class AddressViewSet(viewsets.ModelViewSet):
 class ShopViewSet(viewsets.ModelViewSet):
     serializer_class = ShopSerializer
     queryset = Shop.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (AllowAny,)
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
