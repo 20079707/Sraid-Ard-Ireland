@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'app',
+    'user',
     'rest_framework',
     'corsheaders',
 ]
@@ -69,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 WSGI_APPLICATION = 'FYP.wsgi.application'
 

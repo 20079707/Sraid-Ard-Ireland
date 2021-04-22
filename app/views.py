@@ -7,33 +7,15 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from app.models import Product, Address, Shop, Category
-from app.serializers import ProductSerializer, AddressSerializer, ShopSerializer, UserSerializer, CategorySerializer
+from app.serializers import ProductSerializer, AddressSerializer, ShopSerializer, CategorySerializer
 
 
 def Temp(request):
     return render(request, 'FYP_temp.html')
 
 
-# class Another(View):
-#    products = Product.objects.exclude(Quantity=0)
-
-#    output = ''
-
-#    for product in products:
-#        output += f"We have {product.Name} in our DB priced at {product.Price}</br>"
-
-#    def get(self, request):
-#        return HttpResponse(self.output)
-
-
 def FYP(request):
     return HttpResponse('First message')
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = (AllowAny,)
 
 
 class ProductViewSet(viewsets.ModelViewSet):

@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('app.urls')),
+    path('user/', include('user.urls')),
     path('auth/', obtain_auth_token),
 ]
 
