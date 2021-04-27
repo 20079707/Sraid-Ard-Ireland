@@ -22,6 +22,9 @@ class MyUserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            first_name=first_name,
+            last_name=last_name
+
         )
 
         user.set_password(password)
@@ -60,8 +63,23 @@ class User(AbstractBaseUser):
 
     objects = MyUserManager()
 
+    class Meta:
+        permissions = [
+            ('can_view', 'can_view'),
+            ('can_edit', 'can_edit')
+        ]
+
     def __str__(self):
         return self.email
+
+    def grant_permission(self):
+        if self.is_staff:
+            self.has_perm('app.add_app'),
+            self.has_perm('app.change_app'),
+            self.has_perm('app.delete_app'),
+            self.has_perm('app.view_app'),
+        else:
+            self.has_perm('app.view_app')
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -70,4 +88,35 @@ class User(AbstractBaseUser):
         return True
 
 
+class Staff(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    username = models.CharField(max_length=30, unique=True)
 
+
+def set_staff_status_receiver(sender, instance, *args, **kwargs):
+    if not instance.user.is_staff:
+        instance.user.is_staff = True
+        instance.user.save()
+
+
+post_save.connect(set_staff_status_receiver, sender=Staff)
+
+
+class NonStaff(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    username = models.CharField(max_length=30, unique=True)
+
+
+def set_not_staff_status_receiver(sender, instance, *args, **kwargs):
+    if instance.user.is_staff:
+        instance.user.is_staff = False
+        instance.user.save()
+
+
+post_save.connect(set_not_staff_status_receiver, sender=NonStaff)
