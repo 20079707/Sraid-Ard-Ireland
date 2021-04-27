@@ -12,25 +12,20 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-    address = AddressSerializer(many=False)
-
     class Meta:
         model = Shop
-        fields = ['shop_name', 'slogan', 'description', 'address', 'business_reg', 'logo', 'shop_image']
+        fields = ['shop_name', 'id', 'slogan', 'description', 'business_reg', 'logo', 'shop_image', 'address_line1',
+                  'address_line2', 'town_city', 'county', 'eir_code']
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Category
         fields = ['id', 'name', 'category_description', 'category_image']
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    shop = ShopSerializer(many=False)
-    category = CategorySerializer(many=False)
-
     class Meta:
         model = Product
-        fields = ['product_code', 'name', 'price', 'product_description', 'last_update', 'product_image',
-                  'colour', 'stock', 'category', 'shipping_fee', 'shop']
+        fields = ['product_code', 'name', 'price', 'quantity', 'weight', 'product_description', 'last_update',
+                  'product_image', 'colour', 'stock', 'category', 'shipping_fee', 'shop']

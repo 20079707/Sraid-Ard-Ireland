@@ -14,6 +14,6 @@ router.register('shops', ShopViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     #    path('another', Another.as_view()),
-    path('temp', views.Temp),
+
 ]
 

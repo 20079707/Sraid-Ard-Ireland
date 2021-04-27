@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.models import Product, Address, Shop, Category
+from app.models import Product, Address, Shop, Category, Profile
 
 
 @admin.register(Product)
@@ -26,3 +26,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     list_display = ['county']
     search_fields = ['county']
+
+
+admin.site.register(Profile)
