@@ -18,7 +18,6 @@ class Address(models.Model):
 
 
 class Shop(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True)
     business_reg = models.CharField(max_length=10, blank=False, unique=True)
     shop_name = models.CharField(max_length=50, blank=False)
     slogan = models.CharField(max_length=150, blank=True, null=True)

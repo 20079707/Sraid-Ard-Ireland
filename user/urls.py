@@ -8,5 +8,4 @@ router.register('users', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('register/', registration_view, name="register"),
 ]
