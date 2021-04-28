@@ -1,7 +1,7 @@
 asgiref==3.3.1
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==3.1.7
+Django==3.1.8
 django-cors-headers==3.7.0
 django-discover-runner==1.0
 django-rest-framework-roles==0.6
