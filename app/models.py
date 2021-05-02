@@ -47,7 +47,9 @@ class Category(models.Model):
         return str(self.name)
 
 
-class Product(models.Model):
+class Product(models.Model):  # product model
+
+    # category options
     red = 'Red'
     blue = 'Blue'
     green = 'Green'
@@ -81,7 +83,7 @@ class Product(models.Model):
         (pink, 'Pink'),
     ]
 
-    product_code = models.AutoField(primary_key=True, auto_created=True, unique=True)
+    product_code = models.AutoField(primary_key=True, auto_created=True, unique=True)  # primary key
     name = models.CharField(max_length=50, null=False, blank=True)
     price = models.DecimalField(default=0, max_digits=1000, decimal_places=2)
     product_image = models.ImageField(upload_to=upload_path, default='', null=True, blank=True)
@@ -93,14 +95,20 @@ class Product(models.Model):
     entry_date = models.DateTimeField(auto_now_add=True, null=True)
     last_update = models.DateTimeField(auto_now=True, null=True)
     weight = models.DecimalField(default=0, max_digits=100, decimal_places=1, blank=True)
-    shop = models.ForeignKey(Shop, null=True, blank=False, on_delete=models.PROTECT)
+    shop = models.ForeignKey(Shop, null=True, blank=False, on_delete=models.PROTECT)    # shop foreign key
+    # category foreign key
     category = models.ForeignKey(Category, to_field='name', null=True, blank=True, on_delete=models.PROTECT)
 
-    def has_add_permission(self, request, obj=None):
+    # superuser permissions
+
+    @staticmethod
+    def has_add_permission(request, obj=None):
         return request.user.is_superuser
 
-    def has_delete_permission(self, request, obj=None):
+    @staticmethod
+    def has_delete_permission(request, obj=None):
         return request.user.is_superuser
 
-    def has_update_permission(self, request, obj=None):
+    @staticmethod
+    def has_update_permission(request, obj=None):
         return request.user.is_superuser

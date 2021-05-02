@@ -21,8 +21,8 @@ def FYP(request):
     return HttpResponse('First message')
 
 
-class ProductViewSet(RoleViewSetMixin, ModelViewSet):
-    serializer_class = ProductSerializer
+class ProductViewSet(RoleViewSetMixin, ModelViewSet):   # product viewset
+    serializer_class = ProductSerializer    # calls product serializer
     queryset = Product.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticatedOrReadOnly, )
@@ -35,17 +35,17 @@ class ProductViewSet(RoleViewSetMixin, ModelViewSet):
         return HttpResponse({'message': 'Product Created'}, status=200)
 
 
-class AddressViewSet(viewsets.ModelViewSet):
+class AddressViewSet(viewsets.ModelViewSet):    # address viewset
     serializer_class = AddressSerializer
-    queryset = Address.objects.all()
-    authentication_classes = (TokenAuthentication,)
+    queryset = Address.objects.all()    # displays all address objects
+    authentication_classes = (TokenAuthentication,) # requires a token to authenticate user
 
 
 class ShopViewSet(viewsets.ModelViewSet):
     serializer_class = ShopSerializer
     queryset = Shop.objects.all()
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)   # user has to be authenticate dor only allowed to read data
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -10,12 +10,13 @@ from user.views import (
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('app/', include('app.urls')),
-    path('user/', include('user.urls')),
-    path('auth/', obtain_auth_token),
+    path('admin/', admin.site.urls),    # admin page url
+    path('app/', include('app.urls')),  # app route redirects to the app application
+    path('user/', include('user.urls')),    # user route redirects to the user application
+    path('auth/', obtain_auth_token),   # auth route listen authorizes user
 
 ]
 
+# allows for photos to be viewed on browser
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
